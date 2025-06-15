@@ -16,16 +16,8 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
-const MONGODB_URI='mongodb+srv://harshiv:tC5APrigITV4Rk04@cluster0.wm0p6x3.mongodb.net/';
-
-mongoose.connect(MONGODB_URI)
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
-  });
+// MongoDB URI
+const MONGODB_URI = 'mongodb+srv://harshiv:tC5APrigITV4Rk04@cluster0.wm0p6x3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 // Routes
 app.use('/api/patients', patientRoutes);
@@ -56,6 +48,15 @@ app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// ✅ Connect to MongoDB first, THEN start server
+mongoose.connect(MONGODB_URI)
+  .then(() => {
+    console.log('✅ Connected to MongoDB');
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('❌ MongoDB connection error:', error);
+    process.exit(1); // Exit the app if DB connection fails
+  });
