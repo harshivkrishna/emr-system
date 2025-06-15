@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-const MONGODB_URI = process.env.MONGODB_URI || 'your-default-uri-here';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://ckeerthikumarcse2023:hQRq4MKVrpdCilyI@emrsystem.c7dyoo7.mongodb.net/';
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('✅ Connected to MongoDB'))
