@@ -1,8 +1,9 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import serverless from 'serverless-http';
+
+import connectToDatabase from './db.js';
 
 import patientRoutes from './routes/patients.js';
 import prescriptionRoutes from './routes/prescriptions.js';
@@ -17,12 +18,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://ckeerthikumarcse2023:hQRq4MKVrpdCilyI@emrsystem.c7dyoo7.mongodb.net/';
-
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('✅ Connected to MongoDB'))
-  .catch((error) => console.error('❌ MongoDB connection error:', error));
+// Connect to MongoDB (with caching for serverless)
+await connectToDatabase();
 
 // Routes
 app.use('/api/patients', patientRoutes);
