@@ -33,7 +33,7 @@ const SearchPage: React.FC = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get<{ patients: Patient[] }>('http://localhost:5000/api/patients');
+      const response = await axios.get<{ patients: Patient[] }>('https://emr-system-api.vercel.app/api/patients');
       setPatients(response.data.patients);
       setFilteredPatients(response.data.patients);
     } catch (err) {

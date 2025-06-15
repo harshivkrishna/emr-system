@@ -28,13 +28,13 @@ const PatientDetails: React.FC = () => {
     const fetchData = async () => {
       try {
         // Fetching *single* patient - adjust the API URL or add filters here
-        const patientRes = await axios.get<Patient>(`http://localhost:5000/api/patients/${id}`); // Modify endpoint as needed
+        const patientRes = await axios.get<Patient>(`https://emr-system-api.vercel.app/api/patients/${id}`); // Modify endpoint as needed
         const patientData = patientRes.data;
 
         if (patientData && patientData._id) {
           setPatient(patientData);
           const prescriptionsRes = await axios.get<Prescription[]>(
-            `http://localhost:5000/api/prescriptions/${patientData._id}`
+            `https://emr-system-api.vercel.app/api/prescriptions/${patientData._id}`
           );
           setPrescriptions(prescriptionsRes.data);
 

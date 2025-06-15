@@ -28,7 +28,7 @@ const PatientList: React.FC = () => {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/patients`);
+        const response = await axios.get(`https://emr-system-api.vercel.app/api/patients`);
         const data = response.data;
         // Ensure data is an array
         if (Array.isArray(data)) {
