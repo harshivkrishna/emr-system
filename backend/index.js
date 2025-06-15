@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-const MONGODB_URI='mongodb+srv://harshiv:tC5APrigITV4Rk04@cluster0.wm0p6x3.mongodb.net/';
+const MONGODB_URI='mongodb+srv://ckeerthikumarcse2023:hQRq4MKVrpdCilyI@emrsystem.c7dyoo7.mongodb.net/';
 
 mongoose.connect(MONGODB_URI)
   .then(() => {
