@@ -34,7 +34,7 @@ const RegisterPatient: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`https://emr-system-api.vercel.app/api/patients`, {
+      const response = await fetch(`https://medcare-backend-api.onrender.com/api/patients`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
