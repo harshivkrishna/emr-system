@@ -59,9 +59,7 @@ const PrescriptionForm: React.FC = () => {
     const getPatient = async () => {
       if (id) {
         try {
-          const response = await axios.get(
-            `https://emr-system-api.vercel.app/api/patients/${id}`
-          );
+          const response = await axios.get(`https://medcare-backend-api.onrender.com/api/patients/${id}`);
           setPatient(response.data);
         } catch (err) {
           console.error("Error fetching patient:", err);
@@ -157,10 +155,7 @@ const PrescriptionForm: React.FC = () => {
       Please follow the instructions carefully. Contact your doctor if you have any questions.`;
 
       // Send prescription to backend
-      const response1 = await axios.post(
-        "https://emr-system-api.vercel.app/api/prescriptions",
-        newPrescription
-      );
+      const response1 = await axios.post('https://medcare-backend-api.onrender.com/api/prescriptions', newPrescription);
 
       const response2 = await axios.post(
         "https://emr-system.onrender.com/send-message",
