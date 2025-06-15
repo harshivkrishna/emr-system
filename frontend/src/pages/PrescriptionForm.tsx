@@ -45,7 +45,7 @@ const PrescriptionForm: React.FC = () => {
     const getPatient = async () => {
       if (id) {
         try {
-          const response = await axios.get(`http://localhost:5000/api/patients/${id}`);
+          const response = await axios.get(`https://emr-system-api.vercel.app/api/patients/${id}`);
           setPatient(response.data);
         } catch (err) {
           console.error('Error fetching patient:', err);
@@ -124,7 +124,7 @@ const PrescriptionForm: React.FC = () => {
 
 
       // Send prescription to backend
-      const response1 = await axios.post('http://localhost:5000/api/prescriptions', newPrescription);
+      const response1 = await axios.post('https://emr-system-api.vercel.app/api/prescriptions', newPrescription);
 
       const response2 = await axios.post('http://localhost:5002/send-message', {
         number: `91${patient.phone}`,

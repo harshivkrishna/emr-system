@@ -38,7 +38,7 @@ const FollowUpManager: React.FC = () => {
 
   const fetchFollowUps = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/followups');
+      const response = await axios.get('https://emr-system-api.vercel.app/api/followups');
       setFollowUps(response.data.followUps);
     } catch (error) {
       console.error('Error fetching follow-ups:', error);
@@ -47,7 +47,7 @@ const FollowUpManager: React.FC = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/patients');
+      const response = await axios.get('https://emr-system-api.vercel.app/api/patients');
       setPatients(response.data.patients);
     } catch (error) {
       console.error('Error fetching patients:', error);
@@ -57,7 +57,7 @@ const FollowUpManager: React.FC = () => {
   const addFollowUp = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/followups', newFollowUp);
+      const response = await axios.post('https://emr-system-api.vercel.app/api/followups', newFollowUp);
       setFollowUps([...followUps, response.data]);
       setNewFollowUp({ patient_id: '', reason: '', scheduled_date: '', notes: '' });
       setShowAddForm(false);
@@ -74,7 +74,7 @@ const FollowUpManager: React.FC = () => {
 
   const updateFollowUpStatus = async (id: string, status: 'completed' | 'rescheduled') => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/followups/${id}`, { status });
+      const response = await axios.put(`https://emr-system-api.vercel.app/api/followups/${id}`, { status });
       const updatedFollowUp = response.data;
       setFollowUps((prev) => prev.map(f => f._id === updatedFollowUp._id ? updatedFollowUp : f));
     } catch (error) {
