@@ -1,6 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 
 import connectToDatabase from './db.js';
 
@@ -14,10 +15,8 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-
 
 const allowedOrigins = ['https://judo-bill.vercel.app', 'http://localhost:5173'];
 
@@ -39,23 +38,6 @@ app.use(cors({
   credentials: true
 }));
 
-app.options('*', cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: [
-    'X-CSRF-Token',
-    'X-Requested-With',
-    'Accept',
-    'Accept-Version',
-    'Content-Length',
-    'Content-MD5',
-    'Content-Type',
-    'Date',
-    'X-Api-Version',
-    'Authorization'
-  ],
-  credentials: true
-}));
 // Connect to MongoDB (with caching for serverless)
 await connectToDatabase();
 
@@ -79,4 +61,4 @@ app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-module.exports = app;
+export default app;
